@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Locations — Crooney Interactive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Mono:wght@300;400&family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:    #faf7f2;
+  --parch:    #f2ede4;
+  --ink:      #0e0d0b;
+  --ink-mid:  #7a7268;
+  --ink-light:#b0a898;
+  --rule:     rgba(14,13,11,0.10);
+  --rule-lt:  rgba(14,13,11,0.06);
+  --gold:     #c8a96a;
+  --gold-lt:  rgba(200,169,106,0.15);
+  --max-w:    1060px;
+
+  /* node accent colours */
+  --c-van:    #2a4a6a;   /* Vancouver — deep slate */
+  --c-vi:     #8b3a2a;   /* VanIsle — terracotta */
+  --c-vg:     #3a5f7a;   /* Vegas — slate blue */
+  --c-anz:    #4a7a5a;   /* ANZA — Pacific green */
+  --c-eu:     #5a4a7a;   /* Euro — Tuscan violet */
+  --c-uk:     #3a5a3a;   /* UK — forest */
+  --c-jp:     #7a4a2a;   /* Japan — warm umber */
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ── TOPBAR ── */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(14,13,11,0.95);
+  border-bottom: 0.5px solid rgba(250,247,242,0.08);
+  backdrop-filter: blur(12px);
+}
+.topbar-inner {
+  max-width: var(--max-w); margin: 0 auto;
+  padding: 0 2rem;
+  display: flex; align-items: center;
+  overflow-x: auto; scrollbar-width: none;
+}
+.topbar-inner::-webkit-scrollbar { display: none; }
+.topbar-brand {
+  display: flex; flex-direction: column;
+  padding: 0.6rem 1.5rem 0.4rem 0;
+  border-right: 0.5px solid rgba(250,247,242,0.08);
+  text-decoration: none; flex-shrink: 0;
+}
+.topbar-brand-kicker {
+  font-family: 'DM Mono', monospace; font-size: 8px;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: rgba(250,247,242,0.4); margin-top: 2px;
+}
+.topbar-brand-name {
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px;
+  font-weight: 700; color: rgba(250,247,242,0.9); letter-spacing: -0.01em;
+}
+.subnav {
+  display: flex;
+  margin-left: auto;
+  overflow-x: auto; scrollbar-width: none;
+}
+.subnav::-webkit-scrollbar { display: none; }
+.subnav-link {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(250,247,242,0.45); text-decoration: none;
+  padding: 1rem 1.1rem; white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+.subnav-link:hover { color: rgba(250,247,242,0.9); }
+.subnav-link.active { color: rgba(250,247,242,0.9); border-bottom-color: var(--gold); }
+
+/* ── HERO ── */
+.hero {
+  max-width: var(--max-w); margin: 0 auto;
+  padding: 7rem 2rem 5rem;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+}
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 2rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.hero-eyebrow::after {
+  content: '';
+  display: block; height: 1px; width: 60px;
+  background: var(--gold); opacity: 0.4;
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2.8rem, 6vw, 5.2rem);
+  font-weight: 300; line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin-bottom: 2rem;
+}
+.hero h1 em { font-style: italic; }
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--ink-mid);
+  max-width: 600px;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+.hero-claim {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--ink);
+  border-left: 2px solid var(--gold);
+  padding-left: 1.25rem;
+  max-width: 640px;
+  line-height: 1.6;
+}
+
+/* video placeholder */
+.video-slot {
+  margin-top: 4rem;
+  aspect-ratio: 16/6;
+  background: var(--parch);
+  border: 1px solid var(--rule);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 0.75rem;
+  position: relative; overflow: hidden;
+}
+.video-slot::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 20px,
+    rgba(14,13,11,0.025) 20px,
+    rgba(14,13,11,0.025) 21px
+  );
+}
+.video-slot-label {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-light); position: relative;
+}
+.video-slot-sub {
+  font-family: 'DM Mono', monospace; font-size: 8px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-light); opacity: 0.6; position: relative;
+}
+
+/* ── SECTION WRAPPER ── */
+.section {
+  max-width: var(--max-w); margin: 0 auto;
+  padding: 5rem 2rem;
+  border-bottom: 1px solid var(--rule);
+}
+.section-label {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1.5rem;
+}
+.section h2 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 300; line-height: 1.15;
+  margin-bottom: 1.5rem;
+}
+.section h2 em { font-style: italic; }
+.section p {
+  color: var(--ink-mid);
+  max-width: 680px;
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+.section p:last-child { margin-bottom: 0; }
+.section p strong { color: var(--ink); font-weight: 400; }
+
+/* ── QUT VENN ── */
+.venn-wrap {
+  margin: 3.5rem 0 2rem;
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.venn-diagram {
+  flex-shrink: 0;
+}
+.venn-key {
+  flex: 1;
+  min-width: 240px;
+}
+.venn-key-title {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-mid); margin-bottom: 1.25rem;
+}
+.venn-key-row {
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.venn-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  flex-shrink: 0; margin-top: 0.3rem;
+}
+.venn-key-text {
+  font-size: 0.85rem; line-height: 1.55;
+  color: var(--ink-mid);
+}
+.venn-key-text strong { color: var(--ink); font-weight: 400; }
+
+/* intersection zones */
+.venn-intersections {
+  margin-top: 2rem;
+}
+.venn-int-title {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-light); margin-bottom: 1rem;
+}
+.venn-int-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 1.5rem;
+  font-size: 0.8rem;
+  color: var(--ink-mid);
+  line-height: 1.5;
+}
+.venn-int-item strong {
+  color: var(--ink); font-weight: 400; display: block;
+  font-size: 0.78rem;
+}
+
+/* ── NODE NETWORK ── */
+.node-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-top: 3rem;
+}
+.node-card {
+  background: var(--cream);
+  padding: 1.75rem;
+  display: flex; flex-direction: column;
+  gap: 0.75rem;
+  transition: background 0.2s;
+  text-decoration: none; color: inherit;
+  position: relative;
+}
+.node-card:hover { background: var(--parch); }
+.node-card-accent {
+  width: 28px; height: 2px;
+  margin-bottom: 0.25rem;
+}
+.node-card-number {
+  font-family: 'DM Mono', monospace; font-size: 8px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-light);
+}
+.node-card-name {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.4rem; font-weight: 300;
+  line-height: 1.1;
+}
+.node-card-sub {
+  font-family: 'DM Mono', monospace; font-size: 8px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-light); line-height: 1.5;
+}
+.node-card-variety {
+  font-size: 0.82rem; color: var(--ink-mid);
+  line-height: 1.55; border-top: 1px solid var(--rule-lt);
+  padding-top: 0.75rem; margin-top: auto;
+}
+.node-card-status {
+  font-family: 'DM Mono', monospace; font-size: 7.5px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  margin-top: 0.5rem;
+}
+
+/* Vancouver — default (no link, styled differently) */
+.node-card.default-node {
+  background: var(--parch);
+  border-left: 3px solid var(--c-van);
+}
+.node-card.default-node:hover { background: #ece6dc; }
+
+/* ── VSM TABLE ── */
+.vsm-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2.5rem;
+  font-size: 0.85rem;
+}
+.vsm-table th {
+  font-family: 'DM Mono', monospace; font-size: 8px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-mid); text-align: left;
+  padding: 0.6rem 1rem; border-bottom: 2px solid var(--ink);
+  font-weight: 400;
+}
+.vsm-table td {
+  padding: 0.85rem 1rem; border-bottom: 1px solid var(--rule);
+  vertical-align: top; line-height: 1.55;
+  color: var(--ink-mid);
+}
+.vsm-table td:first-child {
+  font-family: 'DM Mono', monospace; font-size: 8px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink); white-space: nowrap;
+  font-weight: 400;
+}
+.vsm-table td strong { color: var(--ink); font-weight: 400; }
+.vsm-table tr:hover td { background: var(--rule-lt); }
+
+/* ── FDSL GRID ── */
+.fdsl-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-top: 2.5rem;
+}
+.fdsl-cell {
+  background: var(--cream);
+  padding: 1.5rem 1.25rem;
+}
+.fdsl-register {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.5rem;
+}
+.fdsl-name {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.25rem; font-weight: 300;
+  margin-bottom: 0.75rem;
+}
+.fdsl-rule {
+  font-size: 0.8rem; color: var(--ink-mid);
+  line-height: 1.55; margin-bottom: 0.75rem;
+}
+.fdsl-nodes {
+  font-family: 'DM Mono', monospace; font-size: 7.5px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-light); line-height: 1.8;
+}
+
+/* ── SWITCHING LOGIC ── */
+.switching-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+.switching-card {
+  border: 1px solid var(--rule);
+  padding: 1.5rem;
+}
+.switching-node {
+  font-family: 'DM Mono', monospace; font-size: 8px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.6rem;
+}
+.switching-dot {
+  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+}
+.switching-text {
+  font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;
+}
+
+/* ── VANCOUVER PROOF ── */
+.proof-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+.proof-table {
+  width: 100%; border-collapse: collapse; font-size: 0.82rem;
+}
+.proof-table th {
+  font-family: 'DM Mono', monospace; font-size: 7.5px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-mid); text-align: left;
+  padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--rule);
+  font-weight: 400;
+}
+.proof-table td {
+  padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--rule-lt);
+  color: var(--ink-mid); vertical-align: top; line-height: 1.5;
+}
+.proof-table td:first-child {
+  font-family: 'DM Mono', monospace; font-size: 7.5px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gold); white-space: nowrap;
+}
+.proof-note {
+  font-size: 0.82rem; color: var(--ink-mid); line-height: 1.6;
+}
+.proof-note + .proof-note { margin-top: 1rem; }
+.proof-note strong { color: var(--ink); font-weight: 400; }
+
+/* ── CLUSTER MAP ── */
+.cluster-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-top: 2rem;
+}
+.cluster-item {
+  background: var(--cream);
+  padding: 1.25rem;
+}
+.cluster-venue {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.05rem; font-weight: 400;
+  margin-bottom: 0.4rem;
+}
+.cluster-reg {
+  font-family: 'DM Mono', monospace; font-size: 7.5px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.5rem;
+}
+.cluster-note {
+  font-size: 0.78rem; color: var(--ink-mid); line-height: 1.5;
+}
+.cluster-status {
+  font-family: 'DM Mono', monospace; font-size: 7px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-light); margin-top: 0.4rem;
+}
+
+/* ── FIND THE WORK ── */
+.find-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-top: 2.5rem;
+}
+.find-card {
+  background: var(--cream);
+  padding: 1.5rem 1.25rem;
+  text-decoration: none; color: inherit;
+  transition: background 0.15s;
+  display: flex; flex-direction: column; gap: 0.4rem;
+}
+.find-card:hover { background: var(--parch); }
+.find-card-label {
+  font-family: 'DM Mono', monospace; font-size: 8px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold);
+}
+.find-card-name {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.2rem; font-weight: 300;
+}
+.find-card-sub {
+  font-size: 0.78rem; color: var(--ink-mid); line-height: 1.5;
+}
+
+/* ── FOOTER ── */
+footer {
+  max-width: var(--max-w); margin: 0 auto;
+  padding: 3rem 2rem;
+  border-top: 1px solid var(--rule);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+}
+.footer-left {
+  font-family: 'DM Mono', monospace; font-size: 8px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-light);
+}
+.footer-right {
+  display: flex; gap: 2rem;
+}
+.footer-right a {
+  font-family: 'DM Mono', monospace; font-size: 8px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-light); text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-right a:hover { color: var(--ink); }
+
+/* ── REVEAL ── */
+.reveal {
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+
+/* ── ROTATING 8TH PANEL ── */
+.rotating-panel {
+  background: rgba(14,13,11,0.88);
+  border: 1px solid rgba(200,169,106,0.2);
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  min-height: 220px;
+}
+.rotating-panel .node-card-name em { font-style: italic; color: var(--gold); }
+.rotating-inner { flex: 1; position: relative; }
+.rotating-slide {
+  display: none; flex-direction: column; gap: 0.6rem;
+  position: absolute; inset: 0;
+  animation: fadeSlide 0.5s ease;
+}
+.rotating-slide.active { display: flex; }
+.rotating-slide .node-card-number { color: var(--gold); opacity: 0.7; }
+.rotating-slide .node-card-name { color: rgba(250,247,242,0.92); }
+.rotating-slide .node-card-variety { color: rgba(250,247,242,0.55); font-size: 0.78rem; }
+.rotating-link {
+  font-family: 'DM Mono', monospace; font-size: 8px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); text-decoration: none;
+  margin-top: auto; padding-top: 0.5rem;
+  border-top: 1px solid rgba(200,169,106,0.2);
+  transition: opacity 0.15s;
+}
+.rotating-link:hover { opacity: 0.7; }
+.rotating-dots {
+  display: flex; gap: 5px;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(250,247,242,0.06);
+  flex-shrink: 0;
+}
+.dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(250,247,242,0.15);
+  cursor: pointer; transition: background 0.2s;
+}
+.dot.active { background: rgba(200,169,106,0.7); }
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 720px) {
+  .fdsl-grid { grid-template-columns: 1fr 1fr; }
+  .proof-grid { grid-template-columns: 1fr; }
+  .venn-wrap { flex-direction: column; }
+}
+@media (max-width: 480px) {
+  .fdsl-grid { grid-template-columns: 1fr; }
+  .hero { padding: 4rem 1.25rem 3rem; }
+  .section { padding: 3rem 1.25rem; }
+}
+
+/* ── ROTATING 8TH PANEL ── */
+.node-card--rotating {
+  display: flex; flex-direction: column;
+  background: rgba(14,13,11,0.04);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 1.5rem;
+  cursor: default;
+}
+.rotating-inner { flex: 1; position: relative; }
+.rotating-slide {
+  display: none; flex-direction: column;
+  gap: 0.75rem;
+}
+.rotating-slide.active {
+  display: flex;
+  animation: fadeSlide 0.5s ease;
+}
+.rotating-symbol {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.25rem;
+}
+.rotating-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.2rem; font-weight: 300;
+  line-height: 1.2; color: var(--ink);
+}
+.rotating-sub {
+  font-family: 'DM Mono', monospace; font-size: 8px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-light);
+}
+.rotating-desc {
+  font-size: 0.85rem; color: var(--ink-mid);
+  line-height: 1.6;
+}
+.rotating-link {
+  font-family: 'DM Mono', monospace; font-size: 8px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-mid); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 1px;
+  transition: color 0.15s, border-color 0.15s;
+  margin-top: auto;
+}
+.rotating-link:hover { color: var(--ink); border-color: var(--ink); }
+.rotating-link svg { width: 10px; height: 10px; transition: transform 0.2s; }
+.rotating-link:hover svg { transform: translateX(3px); }
+.rotating-dots {
+  display: flex; gap: 5px;
+  padding-top: 1.25rem;
+  border-top: 0.5px solid var(--rule);
+  margin-top: 1.25rem;
+}
+.rotating-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(14,13,11,0.15); cursor: pointer;
+  transition: background 0.2s;
+}
+.rotating-dot.active { background: var(--gold); }
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ── TOPBAR ── -->
+<nav class="topbar" role="navigation" aria-label="Site navigation">
+  <div class="topbar-inner">
+    <a href="https://crooney.ca" class="topbar-brand">
+      <span class="topbar-brand-kicker">Crooney Interactive</span>
+      <span class="topbar-brand-name">crooney.ca</span>
+    </a>
+    <nav class="subnav">
+      <a href="https://crooney.ca/ecosystem/" class="subnav-link">Ecosystem</a>
+      <a href="https://vanisle.crooney.ca" class="subnav-link">VanIsle</a>
+      <a href="https://vegas.crooney.ca" class="subnav-link">Vegas</a>
+      <a href="https://anza.crooney.ca" class="subnav-link">Anza</a>
+      <a href="https://euro.crooney.ca" class="subnav-link">Euro</a>
+      <a href="https://uk.crooney.ca" class="subnav-link">UK</a>
+      <a href="https://japan.crooney.ca" class="subnav-link">Japan</a>
+      <a href="https://phd.crooney.ca" class="subnav-link">PhD</a>
+      <a href="https://lab.crooney.ca" class="subnav-link">Lab</a>
+    </nav>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<header class="hero reveal">
+  <div class="hero-eyebrow">locations.crooney.ca · Vancouver</div>
+  <h1>Regional economies<br>as <em>designed systems</em></h1>
+  <p class="hero-sub">
+    Each location in this network is not a tourism page or a geographic profile.
+    It is an urban informatics research site — examined through coordinated lenses,
+    tested against a single theoretical claim.
+  </p>
+  <blockquote class="hero-claim">
+    "Regional experiential economies can be designed as cybernetic operating systems."
+  </blockquote>
+
+  <!-- VIDEO SLOT — MML Waterfront / 375 Water Street -->
+  <div class="video-slot">
+    <span class="video-slot-label">Multimodal Media Lab · 375 Water Street · Vancouver</span>
+    <span class="video-slot-sub">Video · Pending renovation completion</span>
+  </div>
+</header>
+
+<!-- ── § 1 · THE FRAMEWORK ── -->
+<section class="section reveal">
+  <div class="section-label">§ 1 · The Comparative Architecture</div>
+  <h2>Three circles. <em>Seven lenses.</em></h2>
+  <p>
+    In 2003, Kline, Dyer-Witheford and de Peuter published <em>Digital Play</em> —
+    a three-circuit model of interactivity (Technology / Marketing / Culture)
+    with an outer circulation loop mapping production, consumption, and commodity
+    relationships. Flynn's 2006 MASc thesis at SFU SIAT worked directly from this
+    structure. The three-circle pattern was present and operational from that point.
+  </p>
+  <p>
+    In 2014–15, the Queensland University of Technology Design Lab's Urban Informatics
+    framework — <strong>People / Place / Technology</strong> — surfaced as an
+    independent convergence with Flynn's existing three-layer pattern. QUT is
+    validation, not source. The rotation shown below — Technology at top,
+    Place at bottom-left, People at bottom-right — is Flynn's adaptation,
+    mapping the QUT circles onto the Benjamin/Flynn value registers
+    (exhibition / exchange / cult) and RPV (Resources / Values / Processes)
+    simultaneously. The rotation is the intellectual move, not the circles themselves.
+  </p>
+
+  <div class="venn-wrap">
+    <!-- SVG — Flynn rotation of QUT Urban Informatics framework -->
+    <!-- Original: QUT Design Lab, Brisbane 2014 (People top, Place bl, Technology br) -->
+    <!-- Flynn rotation: Technology top (exhibition value / Resources), -->
+    <!--   Place bottom-left (exchange value / Values),                  -->
+    <!--   People bottom-right (cult value / Processes)                  -->
+    <div class="venn-diagram">
+      <svg width="420" height="430" viewBox="0 0 420 430" xmlns="http://www.w3.org/2000/svg"
+           aria-label="Flynn rotation of QUT Urban Informatics framework — Technology top, Place bottom-left, People bottom-right">
+        <defs>
+          <style>
+            .vc  { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600; font-size: 13px; fill: #0e0d0b; }
+            .vs  { font-family: 'DM Mono', monospace; font-size: 7px; letter-spacing: 0.12em; text-transform: uppercase; fill: #7a7268; }
+            .vi  { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 9.5px; fill: #3a3530; font-style: italic; }
+            .vx  { font-family: 'DM Mono', monospace; font-size: 6.5px; letter-spacing: 0.09em; text-transform: uppercase; fill: #c8a96a; }
+            .vint{ font-family: 'Cormorant Garamond', Georgia, serif; font-size: 8.5px; fill: #5a5248; font-style: italic; }
+            .vrpv{ font-family: 'DM Mono', monospace; font-size: 6px; letter-spacing: 0.1em; text-transform: uppercase; fill: #b0a898; }
+          
+/* ── ROTATING 8TH PANEL ── */
+.node-card--rotating {
+  display: flex; flex-direction: column;
+  background: rgba(14,13,11,0.04);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 1.5rem;
+  cursor: default;
+}
+.rotating-inner { flex: 1; position: relative; }
+.rotating-slide {
+  display: none; flex-direction: column;
+  gap: 0.75rem;
+}
+.rotating-slide.active {
+  display: flex;
+  animation: fadeSlide 0.5s ease;
+}
+.rotating-symbol {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.25rem;
+}
+.rotating-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.2rem; font-weight: 300;
+  line-height: 1.2; color: var(--ink);
+}
+.rotating-sub {
+  font-family: 'DM Mono', monospace; font-size: 8px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-light);
+}
+.rotating-desc {
+  font-size: 0.85rem; color: var(--ink-mid);
+  line-height: 1.6;
+}
+.rotating-link {
+  font-family: 'DM Mono', monospace; font-size: 8px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-mid); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 1px;
+  transition: color 0.15s, border-color 0.15s;
+  margin-top: auto;
+}
+.rotating-link:hover { color: var(--ink); border-color: var(--ink); }
+.rotating-link svg { width: 10px; height: 10px; transition: transform 0.2s; }
+.rotating-link:hover svg { transform: translateX(3px); }
+.rotating-dots {
+  display: flex; gap: 5px;
+  padding-top: 1.25rem;
+  border-top: 0.5px solid var(--rule);
+  margin-top: 1.25rem;
+}
+.rotating-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(14,13,11,0.15); cursor: pointer;
+  transition: background 0.2s;
+}
+.rotating-dot.active { background: var(--gold); }
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+</style>
+        </defs>
+
+        <!-- Circle centres for standard 3-circle Venn, Technology top -->
+        <!-- Technology: cx=210, cy=130, r=108 -->
+        <!-- Place:       cx=130, cy=268, r=108 -->
+        <!-- People:      cx=290, cy=268, r=108 -->
+
+        <!-- TECHNOLOGY circle — top, slate blue -->
+        <circle cx="210" cy="130" r="108" fill="rgba(58,90,120,0.06)" stroke="#3a5a78" stroke-width="1.3"/>
+        <!-- PLACE circle — bottom-left, forest -->
+        <circle cx="130" cy="268" r="108" fill="rgba(58,90,58,0.06)" stroke="#3a5a3a" stroke-width="1.3"/>
+        <!-- PEOPLE circle — bottom-right, warm umber -->
+        <circle cx="290" cy="268" r="108" fill="rgba(90,74,42,0.06)" stroke="#5a4a2a" stroke-width="1.3"/>
+
+        <!-- Centre glow -->
+        <circle cx="210" cy="225" r="30" fill="rgba(200,169,106,0.13)"/>
+        <circle cx="210" cy="225" r="30" fill="none" stroke="rgba(200,169,106,0.35)" stroke-width="0.8"/>
+
+        <!-- ── CIRCLE LABELS ── -->
+        <!-- Technology — top -->
+        <text class="vc" x="210" y="28" text-anchor="middle">Technology</text>
+        <text class="vs" x="210" y="41" text-anchor="middle">Exhibition value · Resources</text>
+
+        <!-- Place — bottom-left -->
+        <text class="vc" x="62" y="390" text-anchor="middle">Place</text>
+        <text class="vs" x="62" y="403" text-anchor="middle">Exchange value · Values</text>
+
+        <!-- People — bottom-right -->
+        <text class="vc" x="358" y="390" text-anchor="middle">People</text>
+        <text class="vs" x="358" y="403" text-anchor="middle">Cult value · Processes</text>
+
+        <!-- ── INTERSECTION ZONE LABELS (outer) ── -->
+        <!-- Technology × Place (top-left) -->
+        <text class="vint" x="118" y="163" text-anchor="middle">Location-Based</text>
+        <text class="vint" x="118" y="175" text-anchor="middle">Services</text>
+        <text class="vint" x="118" y="189" text-anchor="middle">Locative Media</text>
+
+        <!-- Technology × People (top-right) -->
+        <text class="vint" x="302" y="163" text-anchor="middle">Human-Computer</text>
+        <text class="vint" x="302" y="175" text-anchor="middle">Interaction</text>
+        <text class="vint" x="302" y="189" text-anchor="middle">Social Media</text>
+
+        <!-- Place × People (bottom) -->
+        <text class="vint" x="210" y="312" text-anchor="middle">Urban Sociology</text>
+        <text class="vint" x="210" y="325" text-anchor="middle">Place Making</text>
+
+        <!-- ── CENTRE — Urban Informatics ── -->
+        <text class="vc" x="210" y="219" text-anchor="middle" font-size="11">Urban</text>
+        <text class="vc" x="210" y="232" text-anchor="middle" font-size="11">Informatics</text>
+
+        <!-- ── TECHNOLOGY circle — interior items ── -->
+        <text class="vi" x="210" y="65" text-anchor="middle">Systems Design</text>
+        <text class="vi" x="185" y="84" text-anchor="middle">Computer Science</text>
+        <text class="vi" x="235" y="84" text-anchor="middle">Info Systems</text>
+        <text class="vi" x="210" y="102" text-anchor="middle">Mobile Technology</text>
+
+        <!-- ── PLACE circle — interior items ── -->
+        <text class="vi" x="98"  y="282" text-anchor="middle">Urban Design</text>
+        <text class="vi" x="98"  y="298" text-anchor="middle">Urban Studies</text>
+        <text class="vi" x="98"  y="314" text-anchor="middle">Architecture</text>
+        <text class="vi" x="98"  y="332" text-anchor="middle">Urban &amp; Regional</text>
+        <text class="vi" x="98"  y="344" text-anchor="middle">Planning</text>
+
+        <!-- ── PEOPLE circle — interior items ── -->
+        <text class="vi" x="322" y="282" text-anchor="middle">Interaction Design</text>
+        <text class="vi" x="322" y="298" text-anchor="middle">Community</text>
+        <text class="vi" x="322" y="310" text-anchor="middle">Engagement</text>
+        <text class="vi" x="322" y="328" text-anchor="middle">Sociology</text>
+        <text class="vi" x="322" y="346" text-anchor="middle">Communication</text>
+        <text class="vi" x="322" y="358" text-anchor="middle">Studies</text>
+
+        <!-- ── INTERSECTION zone labels (outer edge) ── -->
+        <text class="vs" x="56"  y="205" text-anchor="middle">Place &amp;</text>
+        <text class="vs" x="56"  y="215" text-anchor="middle">Technology</text>
+
+        <text class="vs" x="364" y="205" text-anchor="middle">People &amp;</text>
+        <text class="vs" x="364" y="215" text-anchor="middle">Technology</text>
+
+        <text class="vs" x="210" y="375" text-anchor="middle">People &amp; Place</text>
+
+        <!-- ── FLYNN MAPPING CALLOUTS ── -->
+        <!-- LBE callout — left -->
+        <line x1="80" y1="170" x2="50" y2="155" stroke="rgba(200,169,106,0.5)" stroke-width="0.7"/>
+        <text class="vx" x="46" y="148" text-anchor="middle">LBE</text>
+        <text class="vx" x="46" y="159" text-anchor="middle">design</text>
+
+        <!-- HCI callout — right -->
+        <line x1="340" y1="170" x2="370" y2="155" stroke="rgba(200,169,106,0.5)" stroke-width="0.7"/>
+        <text class="vx" x="374" y="148" text-anchor="middle">Audiofish</text>
+        <text class="vx" x="374" y="159" text-anchor="middle">fish.audio</text>
+
+        <!-- Place Making callout — bottom -->
+        <line x1="210" y1="330" x2="210" y2="355" stroke="rgba(200,169,106,0.5)" stroke-width="0.7"/>
+        <text class="vx" x="210" y="363" text-anchor="middle">Cult value ·</text>
+        <text class="vx" x="210" y="373" text-anchor="middle">Irreducible encounter</text>
+
+        <!-- Source note -->
+        <text class="vrpv" x="210" y="420" text-anchor="middle">QUT Design Lab, Brisbane (2014) — independent convergence with Flynn (2006 MASc, SFU SIAT)</text>
+      </svg>
+    </div>
+
+    <div class="venn-key">
+      <div class="venn-key-title">Flynn rotation — why Technology is at the top</div>
+
+      <div class="venn-key-row">
+        <div class="venn-dot" style="background:#3a5a78;"></div>
+        <div class="venn-key-text">
+          <strong>Technology → Resources → Exhibition value</strong><br>
+          Sound (primary layer) · Food (base layer) · Platform infrastructure ·
+          Production tools. What scales. What distributes.
+        </div>
+      </div>
+      <div class="venn-key-row">
+        <div class="venn-dot" style="background:#3a5a3a;"></div>
+        <div class="venn-key-text">
+          <strong>Place → Values → Exchange value</strong><br>
+          Light (on Sound) · Appellation law · Licence layer · Governance
+          architecture. WHERE authorizes value to circulate.
+        </div>
+      </div>
+      <div class="venn-key-row">
+        <div class="venn-dot" style="background:#5a4a2a;"></div>
+        <div class="venn-key-text">
+          <strong>People → Processes → Cult value</strong><br>
+          Drink (on Food) · Sound curation · Facilitation ·
+          The irreducible encounter. What cannot be reproduced or replaced.
+        </div>
+      </div>
+
+      <div class="venn-intersections">
+        <div class="venn-int-title">The intersections — where contributions live</div>
+        <div class="venn-int-row">
+          <div class="venn-int-item">
+            <strong>Technology × Place</strong>
+            Location-Based Services / Locative Media → LBE design problem
+          </div>
+          <div class="venn-int-item">
+            <strong>Technology × People</strong>
+            HCI / Social Media → Audiofish / fish.audio voice agent
+          </div>
+          <div class="venn-int-item">
+            <strong>People × Place</strong>
+            Place Making / Urban Sociology → cult value · irreducible encounter
+          </div>
+          <div class="venn-int-item">
+            <strong>All three</strong>
+            Urban Informatics → coordinated lenses in practice
+          </div>
+        </div>
+      </div>
+
+      <p style="font-size:0.75rem; color:var(--ink-light); margin-top:1.5rem; line-height:1.6; font-family:'DM Mono',monospace; font-size:7.5px; letter-spacing:0.08em;">
+        The QUT Urban Informatics framework (People top, Place bl, Technology br) was
+        encountered in 2014–15 as an independent convergence with Flynn's existing
+        three-layer pattern from the 2006 MASc thesis — itself informed by Kline,
+        Dyer-Witheford &amp; de Peuter's Three Circuits of Interactivity (<em>Digital Play</em>, 2003).
+        The rotation shown here — Technology top, Place bottom-left, People bottom-right —
+        maps the framework onto the Benjamin/Flynn value registers and RPV simultaneously.
+        QUT is validation, not source.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── § 2 · THE NODE NETWORK ── -->
+<section class="section reveal">
+  <div class="section-label">§ 2 · The Field Site Network</div>
+  <h2>Seven nodes. <em>Seven angles.</em></h2>
+  <p>
+    Each node must satisfy Ashby's Law of Requisite Variety: it must add genuine
+    variety that no other node carries — different scale, different cultural context,
+    different register emphasis. Geographic spread alone is not enough.
+    Miller's Law governs the target: 7±2 nodes, cognitively manageable
+    and methodologically sufficient.
+  </p>
+  <p>
+    The switching between nodes is not geographic browsing.
+    It is Cole's coordinated lenses methodology made navigable.
+    Each node illuminates something the others cannot see from their position.
+  </p>
+
+  <div class="node-grid">
+
+    <!-- Node 1 — Vancouver (default) -->
+    <div class="node-card default-node">
+      <div class="node-card-accent" style="background:var(--c-van);"></div>
+      <div class="node-card-number">Node 1 · Default</div>
+      <div class="node-card-name">Vancouver</div>
+      <div class="node-card-sub">locations.crooney.ca · You are here</div>
+      <div class="node-card-variety">
+        Home base and departure point. Proof-of-concept at street level — Cascade Room,
+        MML, Fionn MacCool's, Fox Cabaret. Institutional infrastructure for the full network.
+        Vancouver is implicit; it is the frame, not the subject.
+      </div>
+      <div class="node-card-status" style="color:var(--c-van);">Active · Proof-of-concept</div>
+    </div>
+
+    <!-- Node 2 — VanIsle -->
+    <a href="https://vanisle.crooney.ca" class="node-card">
+      <div class="node-card-accent" style="background:var(--c-vi);"></div>
+      <div class="node-card-number">Node 2</div>
+      <div class="node-card-name">VanIsle</div>
+      <div class="node-card-sub">vanisle.crooney.ca · Minimum viable economy</div>
+      <div class="node-card-variety">
+        Campbell River and the North Island. WHERE as primary constraint. The primary
+        field site for the PhD's central theoretical claim. Terroir origin; craft spirits
+        appellation; Haig-Brown country. Where cult value lives.
+      </div>
+      <div class="node-card-status" style="color:var(--c-vi);">Active · Primary field site</div>
+    </a>
+
+    <!-- Node 3 — Vegas -->
+    <a href="https://vegas.crooney.ca" class="node-card">
+      <div class="node-card-accent" style="background:var(--c-vg);"></div>
+      <div class="node-card-number">Node 3</div>
+      <div class="node-card-name">Vegas</div>
+      <div class="node-card-sub">vegas.crooney.ca · Maximum variety</div>
+      <div class="node-card-variety">
+        Maximum variety ceiling. Technologies + People dominant.
+        Rippee (Lens 1 / RPV) and Blau (Lens 2 / |F|D|S|L|) as coordinated
+        lenses operating in practice in the field site. The integrated resort
+        as cybernetic operating system at scale.
+      </div>
+      <div class="node-card-status" style="color:var(--c-vg);">Active · Built</div>
+    </a>
+
+    <!-- Node 4 — ANZA -->
+    <a href="https://anza.crooney.ca" class="node-card">
+      <div class="node-card-accent" style="background:var(--c-anz);"></div>
+      <div class="node-card-number">Node 4</div>
+      <div class="node-card-name">Anza</div>
+      <div class="node-card-sub">anza.crooney.ca · Trans-Tasman</div>
+      <div class="node-card-variety">
+        Australia + New Zealand. First node outside North America.
+        QUT Urban Informatics as independent convergence validation.
+        The twenty-year latent bilateral — activated. Dual-function:
+        origin node AND destination node simultaneously.
+      </div>
+      <div class="node-card-status" style="color:var(--c-anz);">Building</div>
+    </a>
+
+    <!-- Node 5 — Euro -->
+    <a href="https://euro.crooney.ca" class="node-card">
+      <div class="node-card-accent" style="background:var(--c-eu);"></div>
+      <div class="node-card-number">Node 5</div>
+      <div class="node-card-name">Euro</div>
+      <div class="node-card-sub">euro.crooney.ca · Continental Europe</div>
+      <div class="node-card-variety">
+        The EU GI framework — PDO, PGI, TSG — as the most institutionally developed
+        Licence layer in the world. IOK Tuscany / Gleiser as primary anchor.
+        The mature model that VanIsle is building toward.
+      </div>
+      <div class="node-card-status" style="color:var(--c-eu);">Building</div>
+    </a>
+
+    <!-- Node 6 — UK -->
+    <a href="https://uk.crooney.ca" class="node-card">
+      <div class="node-card-accent" style="background:var(--c-uk);"></div>
+      <div class="node-card-number">Node 6</div>
+      <div class="node-card-name">UK</div>
+      <div class="node-card-sub">uk.crooney.ca · British Isles</div>
+      <div class="node-card-variety">
+        Islay/Scotch whisky as the existence proof that place-based spirits identity
+        can achieve global legibility. Welsh ownership thread — both active field sites
+        in the network are Welsh-owned. Haig-Brown: Sussex → Campbell River,
+        the magnetic bilateral already operating.
+      </div>
+      <div class="node-card-status" style="color:var(--c-uk);">Building</div>
+    </a>
+
+    <!-- Node 7 — Japan -->
+    <a href="https://japan.crooney.ca" class="node-card">
+      <div class="node-card-accent" style="background:var(--c-jp);"></div>
+      <div class="node-card-number">Node 7</div>
+      <div class="node-card-name">Japan</div>
+      <div class="node-card-sub">japan.crooney.ca · Pacific Rim origin</div>
+      <div class="node-card-variety">
+        The only node that is simultaneously originator, export destination,
+        and inbound market. Karaoke — invented in Japan — is the cult value
+        source of the entire research lineage. The autopoietic exchange value
+        loop closes back to Japan.
+      </div>
+      <div class="node-card-status" style="color:var(--c-jp);">Building</div>
+    </a>
+
+    <!-- Node 8 — Rotating panel -->
+    <div class="node-card rotating-panel" id="rotating-panel">
+      <div class="rotating-inner" id="rotating-inner">
+
+        <div class="rotating-slide active">
+          <div class="node-card-accent" style="background:var(--gold);"></div>
+          <div class="node-card-number">The Governing Claim</div>
+          <div class="node-card-name" style="font-size:1.1rem;">Cybernetic <em>operating systems</em></div>
+          <div class="node-card-variety">
+            "Regional experiential economies can be designed as cybernetic operating systems."
+            Each node is a test of this claim at a different scale and cultural context.
+            The network is the methodology.
+          </div>
+        </div>
+
+        <div class="rotating-slide">
+          <div class="node-card-accent" style="background:var(--gold);"></div>
+          <div class="node-card-number">The Flynn Rotation</div>
+          <div class="node-card-name" style="font-size:1.1rem;">Technology · Place · <em>People</em></div>
+          <div class="node-card-variety">
+            Technology (exhibition value · Resources) at top.
+            Place (exchange value · Values) at bottom-left.
+            People (cult value · Processes) at bottom-right.
+            QUT Urban Informatics, Brisbane 2014 — independent convergence with Flynn (2006).
+          </div>
+          <a class="rotating-link" href="#section-framework">↓ See the diagram</a>
+        </div>
+
+        <div class="rotating-slide">
+          <div class="node-card-accent" style="background:var(--gold);"></div>
+          <div class="node-card-number">Stafford Beer · VSM</div>
+          <div class="node-card-name" style="font-size:1.1rem;">A viable <em>system</em></div>
+          <div class="node-card-variety">
+            System 2 (|F|D|S|L| coordination) · System 3 (VICSS GI / governance) ·
+            System 4 (lab / phd intelligence) · System 5 (George Crooney / policy).
+            Not a list of places. A self-regulating system.
+          </div>
+          <a class="rotating-link" href="#section-vsm">↓ See the architecture</a>
+        </div>
+
+        <div class="rotating-slide">
+          <div class="node-card-accent" style="background:var(--gold);"></div>
+          <div class="node-card-number">Miller's Law · 7 ± 2</div>
+          <div class="node-card-name" style="font-size:1.1rem;">The fractal <em>accordion</em></div>
+          <div class="node-card-variety">
+            Seven location nodes. Seven ecosystem domains. Nine nav tabs.
+            Each layer of the system self-similar — the accordion expands and
+            contracts but the median holds. Lab anchors the right. Always.
+          </div>
+        </div>
+
+      </div>
+      <div class="rotating-dots" id="rotating-dots">
+        <span class="dot active" data-i="0"></span>
+        <span class="dot" data-i="1"></span>
+        <span class="dot" data-i="2"></span>
+        <span class="dot" data-i="3"></span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── § 3 · THE |F|D|S|L| SCHEMA ── -->
+<section class="section reveal">
+  <div class="section-label">§ 3 · The Experience Design Schema</div>
+  <h2>Food · Drink · Sound · <em>Light</em></h2>
+  <p>
+    The |F|D|S|L| schema governs experience design across all location nodes.
+    Each register has a distinct layer logic; each node has named practitioners
+    in each register. The schema is Lens 2 — held in productive tension
+    with Lens 1 (RPV / Christensen) via Cole's coordinated lenses methodology.
+    It does not map onto RPV. The tension between them is the research contribution.
+  </p>
+
+  <div class="fdsl-grid">
+    <div class="fdsl-cell">
+      <div class="fdsl-register">|F| · Food</div>
+      <div class="fdsl-name">Base layer</div>
+      <div class="fdsl-rule">
+        Must exist first. The culinary foundation upon which all other registers rest.
+        Indigenous practice, terroir sourcing, place-specific ingredient.
+      </div>
+      <div class="fdsl-nodes">
+        Vancouver — Darrel Ahenakew (Cascade Room)<br>
+        VanIsle — Horizon · Indigenous dimension<br>
+        ANZA — TBD via Yonah's network<br>
+        Euro — Tuscan IOK context · Slow Food candidate<br>
+        UK — Welsh gastro tradition · TBD<br>
+        Japan — Washoku · local provenance literacy
+      </div>
+    </div>
+    <div class="fdsl-cell">
+      <div class="fdsl-register">|D| · Drink</div>
+      <div class="fdsl-name">On Food</div>
+      <div class="fdsl-rule">
+        Rests on the Food layer. Mixology, craft spirits, terroir liquids.
+        The appellation argument: the exchange value mechanism for the VanIsle
+        craft spirits bilateral.
+      </div>
+      <div class="fdsl-nodes">
+        Vancouver — Yonah Sweetapple (former, Cascade Room)<br>
+        VanIsle — Sheringham / Shelter Point (VICSS framework)<br>
+        ANZA — Yonah (Byron Bay) · Australian distillery TBD<br>
+        Euro — Tuscany wine · PDO/PGI as Licence layer<br>
+        UK — Islay single malt · Welsh whisky (Penderyn)<br>
+        Japan — Japanese craft whisky culture · CPTPP
+      </div>
+    </div>
+    <div class="fdsl-cell">
+      <div class="fdsl-register">|S| · Sound</div>
+      <div class="fdsl-name">Primary layer</div>
+      <div class="fdsl-rule">
+        Must exist first. Sound is the primary register — Light is added on top of it,
+        not independent of it. The live performance, the wilderness soundscape,
+        the knowledge seminar as performance.
+      </div>
+      <div class="fdsl-nodes">
+        Vancouver — George Crooney / Rockaoke Live!<br>
+        VanIsle — Campbell River Lodge / Goose & Gander<br>
+        ANZA — Phil Graham (Brisbane / QUT) · retired; connector<br>
+        Euro — Gleiser IOK seminar as Sound register<br>
+        UK — 1998–2024 empirical timeline; Covid Tapes (Liverpool, Manchester, Glasgow)<br>
+        Japan — Karaoke origin; Inoue; the full research lineage
+      </div>
+    </div>
+    <div class="fdsl-cell">
+      <div class="fdsl-register">|L| · Light</div>
+      <div class="fdsl-name">On Sound</div>
+      <div class="fdsl-rule">
+        A value-adding layer on top of Sound — not an independent fourth register.
+        Light restructures perception of Sound without displacing it.
+        MML / Yangos holds |L| internationally across all nodes.
+      </div>
+      <div class="fdsl-nodes">
+        Vancouver — Evoke / MML (Cascade Room · active)<br>
+        VanIsle — Match Public House Campbell River (Evoke)<br>
+        ANZA — MML international · local via Yonah's network<br>
+        Euro — MML global anchor · Tuscan architectural light TBD<br>
+        UK — MML global · no UK-specific anchor yet<br>
+        Japan — Northern BC coastal light (IslandCamp package)
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── § 4 · SWITCHING LOGIC ── -->
+<section class="section reveal">
+  <div class="section-label">§ 4 · The Switching Logic</div>
+  <h2>Each node sees what <em>others can't</em></h2>
+  <p>
+    The switching between location nodes is Cole's coordinated lenses methodology
+    made navigable. Each node occupies a different position in the research field.
+    From each position, something is visible that is invisible from all other positions.
+    The network is the methodology.
+  </p>
+
+  <div class="switching-grid">
+    <div class="switching-card">
+      <div class="switching-node">
+        <div class="switching-dot" style="background:var(--c-van);"></div>
+        <span style="color:var(--c-van);">Vancouver</span>
+      </div>
+      <div class="switching-text">
+        The proof-of-concept at street level. The institutional infrastructure.
+        The departure point that makes all other nodes legible.
+        MML at the waterfront. Cascade Room on Main Street.
+      </div>
+    </div>
+    <div class="switching-card">
+      <div class="switching-node">
+        <div class="switching-dot" style="background:var(--c-vi);"></div>
+        <span style="color:var(--c-vi);">VanIsle</span>
+      </div>
+      <div class="switching-text">
+        Minimum viable cybernetic operating system. Indigenous territorial context.
+        Haig-Brown's river as argument. The place that exerts pull before any
+        system exists — the counter-argument the research has to hold.
+      </div>
+    </div>
+    <div class="switching-card">
+      <div class="switching-node">
+        <div class="switching-dot" style="background:var(--c-vg);"></div>
+        <span style="color:var(--c-vg);">Vegas</span>
+      </div>
+      <div class="switching-text">
+        Maximum variety. Institutional innovation at scale. Rippee and Blau
+        as Lens 1 and Lens 2 operating in the same field site — empirical
+        evidence that coordinated lenses are genuinely distinct AND coordinatable.
+      </div>
+    </div>
+    <div class="switching-card">
+      <div class="switching-node">
+        <div class="switching-dot" style="background:var(--c-anz);"></div>
+        <span style="color:var(--c-anz);">ANZA</span>
+      </div>
+      <div class="switching-text">
+        The independent convergence — QUT as academic mirror. The twenty-year
+        latent bilateral activated. The only node that routes demand in both
+        directions: origin node and destination node simultaneously.
+      </div>
+    </div>
+    <div class="switching-card">
+      <div class="switching-node">
+        <div class="switching-dot" style="background:var(--c-eu);"></div>
+        <span style="color:var(--c-eu);">Euro</span>
+      </div>
+      <div class="switching-text">
+        The fully developed Licence layer. Centuries of appellation law.
+        IOK Tuscany as the source model the VanIsle prototype is building toward.
+        What the system looks like when it is mature.
+      </div>
+    </div>
+    <div class="switching-card">
+      <div class="switching-node">
+        <div class="switching-dot" style="background:var(--c-uk);"></div>
+        <span style="color:var(--c-uk);">UK</span>
+      </div>
+      <div class="switching-text">
+        Islay as existence proof. Welsh ownership bilateral — already operating,
+        before it was named. Haig-Brown's Sussex origin: the structural
+        human migration that connects England to the primary VanIsle field site.
+      </div>
+    </div>
+    <div class="switching-card">
+      <div class="switching-node">
+        <div class="switching-dot" style="background:var(--c-jp);"></div>
+        <span style="color:var(--c-jp);">Japan</span>
+      </div>
+      <div class="switching-text">
+        The originating cult value source. Karaoke as Inoue's invention — with the
+        same Licence-layer failure Rockaoke made four decades later.
+        The autopoietic Pacific Rim loop that closes back to where it began.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── § 5 · VSM ARCHITECTURE ── -->
+<section class="section reveal">
+  <div class="section-label">§ 5 · System Architecture</div>
+  <h2>A Viable System. <em>Not a list of places.</em></h2>
+  <p>
+    The locations network maps onto Stafford Beer's Viable System Model.
+    Each node is not an independent site — it is a functional component
+    in a self-regulating system. The network routes demand, coordinates variety,
+    governs membership, scans for new field sites, and maintains policy coherence
+    through a single identity register: the George Crooney persona.
+  </p>
+
+  <table class="vsm-table">
+    <thead>
+      <tr>
+        <th>VSM System</th>
+        <th>Function</th>
+        <th>locations.crooney.ca Equivalent</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>System 1 · Operations</td>
+        <td>Each operational unit doing its own work in its own environment</td>
+        <td>Individual location nodes operating in their own markets — VanIsle in BC spirits, Vegas in proptech/LBE, ANZA in Pacific Rim</td>
+      </tr>
+      <tr>
+        <td>System 2 · Coordination</td>
+        <td>Shared schema preventing oscillation between units</td>
+        <td><strong>|F|D|S|L| schema + P·S·L framework</strong> applied consistently across all nodes — the language that makes nodes legible to each other</td>
+      </tr>
+      <tr>
+        <td>System 3 · Control</td>
+        <td>Governance determining what's "in" the viable system</td>
+        <td><strong>VICSS GI / VanIsle appellation</strong> — the instrument that defines membership; the Licence layer that authorizes value transfer</td>
+      </tr>
+      <tr>
+        <td>System 4 · Intelligence</td>
+        <td>Scanning the environment for variety gaps and future states</td>
+        <td><strong>lab.crooney.ca / phd.crooney.ca</strong> — the research function that identifies new nodes and tests theoretical claims in new contexts</td>
+      </tr>
+      <tr>
+        <td>System 5 · Policy</td>
+        <td>Values and identity holding the whole system in coherence</td>
+        <td><strong>crooney.ca / George Crooney persona</strong> — the consistent register across all nodes; the identity that travels from Campbell River to Las Vegas to Byron Bay</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top:2rem;">
+    The network has two node types. <strong>Origin nodes</strong> — Vegas, Euro, Japan, UK —
+    generate demand and route it toward VanIsle via register-specific mechanisms.
+    <strong>Destination nodes</strong> — VanIsle, Vancouver — receive and retain.
+    <strong>ANZA is the only dual-function node:</strong> it routes ANZ buyers toward VanIsle
+    and routes Vancouver production outward to Australia simultaneously.
+  </p>
+</section>
+
+<!-- ── § 6 · VANCOUVER PROOF-OF-CONCEPT ── -->
+<section class="section reveal">
+  <div class="section-label">§ 6 · The Vancouver Proof-of-Concept</div>
+  <h2>Where the <em>framework is deployed</em></h2>
+  <p>
+    Vancouver is not a named destination in this network — it is the methodological
+    frame. But it has a proof-of-concept field site: the Cascade Room, Main Street.
+    All four registers active simultaneously. Named practitioners in each register.
+    The system operating at street level before it travels anywhere.
+  </p>
+  <p>
+    MML — Multimodal Media Lab, 375 Water Street — is the institutional |L| register
+    anchor for the entire network. Operating at the intersection of AI and cinema.
+    Currently under renovation. The video above will be replaced when the space is complete.
+  </p>
+
+  <div class="proof-grid">
+    <div>
+      <table class="proof-table">
+        <thead>
+          <tr>
+            <th>Register</th>
+            <th>Practitioner</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>|F| Food</td>
+            <td>Darrel Ahenakew</td>
+            <td>Head chef; Cree; Ahtahkakoop Cree Nation; Treaty 6; Indigenous culinary practice</td>
+          </tr>
+          <tr>
+            <td>|D| Drink</td>
+            <td>Yonah Sweetapple (former)</td>
+            <td>Bar manager 2016–2019; craft cocktail; Australian-born; origin of soundtrap lineage</td>
+          </tr>
+          <tr>
+            <td>|S| Sound</td>
+            <td>George Crooney / Rockaoke Live!</td>
+            <td>Live performance; empirical research base; ten-year field study</td>
+          </tr>
+          <tr>
+            <td>|L| Light</td>
+            <td>Evoke International Design</td>
+            <td>In-venue graphics; ClearLED integration; active deployment</td>
+          </tr>
+          <tr>
+            <td>Governance</td>
+            <td>Joel Flynn / 1730 Technology Consulting</td>
+            <td>Research methodology; ecosystem design</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <p class="proof-note">
+        <strong>Co-owners:</strong> Robert Edmonds and David Nicolay (Evoke International Design;
+        also part-owners of Main Street Brewing). Co-owner Nigel Pike hired Ahenakew in 2022.
+        Welsh/UK ownership — the UK ↔ VanIsle bilateral already operating before it was named.
+      </p>
+      <p class="proof-note">
+        <strong>MML / Yangos Hadjiyannis</strong> holds the |L| register across all seven nodes
+        internationally. SIGGRAPH VR Theater Director 2024. SXSW XR Mentor. Cannes XR.
+        "Storytelling to storyliving." The institutional anchor that makes the
+        Light register travel.
+      </p>
+      <p class="proof-note">
+        <strong>The Cascade Room</strong> is not a case study — it is the running proof-of-concept.
+        The research doesn't describe it retroactively; it was designed into it.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── § 7 · VANCOUVER ACTIVATION CLUSTER ── -->
+<section class="section reveal">
+  <div class="section-label">§ 7 · The Vancouver Cluster</div>
+  <h2>Mount Pleasant · Cambie Village · <em>Waterfront</em></h2>
+  <p>
+    Vancouver is the departure point. Between Cambie and Main Street — the corridor
+    where most of the network's Vancouver activation is concentrated —
+    several sites form the proof-of-concept cluster. Not a tourism itinerary.
+    A live research infrastructure.
+  </p>
+
+  <div class="cluster-list">
+    <div class="cluster-item">
+      <div class="cluster-reg">|F|D|S|L| · Proof-of-concept</div>
+      <div class="cluster-venue">Cascade Room</div>
+      <div class="cluster-note">Main Street, Mount Pleasant. All four registers fully activated. Named practitioners in each. The running field site.</div>
+      <div class="cluster-status">Active</div>
+    </div>
+    <div class="cluster-item">
+      <div class="cluster-reg">|L| · Institutional anchor</div>
+      <div class="cluster-venue">MML · 375 Water Street</div>
+      <div class="cluster-note">Multimodal Media Lab. AI and cinema. MML ONE production platform. |L| register anchor internationally. Under renovation.</div>
+      <div class="cluster-status">Active partner</div>
+    </div>
+    <div class="cluster-item">
+      <div class="cluster-reg">|S|+|L| · World Cup</div>
+      <div class="cluster-venue">Fionn MacCool's</div>
+      <div class="cluster-note">Cambie Village. ClearLED activation. World Cup live events. Sound and Light registers deployed.</div>
+      <div class="cluster-status">Active</div>
+    </div>
+    <div class="cluster-item">
+      <div class="cluster-reg">|S| · Performance</div>
+      <div class="cluster-venue">Fox Cabaret</div>
+      <div class="cluster-note">Mount Pleasant. Live music venue in the network. Sound register.</div>
+      <div class="cluster-status">In network</div>
+    </div>
+    <div class="cluster-item">
+      <div class="cluster-reg">|S| · Pending activation</div>
+      <div class="cluster-venue">ANZA Club</div>
+      <div class="cluster-note">3 West 8th Ave, Mount Pleasant. Live music grant recipient. Named for the trans-Tasman bilateral. Activate once ANZA linkages established.</div>
+      <div class="cluster-status">Identified · Not yet approached</div>
+    </div>
+    <div class="cluster-item">
+      <div class="cluster-reg">Case study · DNDA candidate</div>
+      <div class="cluster-venue">The American</div>
+      <div class="cluster-note">Cambie Village. Proposed unactivated case study. Potential DNDA Education Award project candidate.</div>
+      <div class="cluster-status">Identified · Not yet approached</div>
+    </div>
+    <div class="cluster-item">
+      <div class="cluster-reg">|S|+|L| · East Van</div>
+      <div class="cluster-venue">Alcove Lounge</div>
+      <div class="cluster-note">East Vancouver near PNE / Burnaby border. World Cup live activation. Separate geographic cluster from Mount Pleasant.</div>
+      <div class="cluster-status">Active</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── § 8 · FIND THE WORK ── -->
+<section class="section reveal" style="border-bottom:none; padding-bottom: 2rem;">
+  <div class="section-label">§ 8 · Find the Work</div>
+  <h2>Where the <em>research lives</em></h2>
+  <p>
+    The locations network is the field deployment layer of the ecosystem.
+    The research, the credential, the curriculum, and the commercial
+    infrastructure all live elsewhere — follow the links.
+  </p>
+
+  <div class="find-grid">
+    <a href="https://lab.crooney.ca" class="find-card">
+      <div class="find-card-label">Field experiments</div>
+      <div class="find-card-name">Lab</div>
+      <div class="find-card-sub">Doctor Obscurity. Travels in Intertextuality. The research mindset running continuously since 2006.</div>
+    </a>
+    <a href="https://phd.crooney.ca" class="find-card">
+      <div class="find-card-label">Theory integration</div>
+      <div class="find-card-name">PhD</div>
+      <div class="find-card-sub">ARIES Certificate. Three papers. RPV / DFV correction. The |F|D|S|L| tacklebox. Carleton TIM.</div>
+    </a>
+    <a href="https://projects.crooney.ca" class="find-card">
+      <div class="find-card-label">Commercialization</div>
+      <div class="find-card-name">Projects</div>
+      <div class="find-card-sub">i2I / SFU Beedie. Mitacs Accelerate Entrepreneur. 1730 Technology Consulting Inc.</div>
+    </a>
+    <a href="https://soundtrap.crooney.ca" class="find-card">
+      <div class="find-card-label">Production archive</div>
+      <div class="find-card-name">Soundtrap</div>
+      <div class="find-card-sub">Covid Tapes. George Crooney's Perfect Storm. The Mariner's Song Project. Vinyl pressing pipeline.</div>
+    </a>
+    <a href="https://vanisle.crooney.ca" class="find-card">
+      <div class="find-card-label">Primary field site</div>
+      <div class="find-card-name">VanIsle</div>
+      <div class="find-card-sub">Campbell River and the North Island. Where the minimum viable experiential economy operates.</div>
+    </a>
+    <a href="https://crooney.ca" class="find-card">
+      <div class="find-card-label">Identity anchor</div>
+      <div class="find-card-name">Crooney</div>
+      <div class="find-card-sub">George Crooney. The persona that travels across all seven nodes. The consistent register.</div>
+    </a>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-left">
+    locations.crooney.ca · Crooney Interactive · 1730 Technology Consulting Inc. · 2026
+  </div>
+  <nav class="footer-right">
+    <a href="https://lab.crooney.ca">Lab</a>
+    <a href="https://phd.crooney.ca">PhD</a>
+    <a href="https://crooney.ca/ecosystem/">Ecosystem</a>
+    <a href="https://crooney.ca">Crooney.ca</a>
+  </nav>
+</footer>
+
+<!-- ── REVEAL OBSERVER ── -->
+<script>
+
+// ── ROTATING PANEL ──
+(function() {
+  const slides = document.querySelectorAll('.rotating-slide');
+  const dots   = document.querySelectorAll('.dot');
+  let current  = 0;
+  let timer;
+
+  function goTo(i) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = i;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+  function next() { goTo((current + 1) % slides.length); }
+  function startTimer() { timer = setInterval(next, 5000); }
+  function resetTimer() { clearInterval(timer); startTimer(); }
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => { goTo(+dot.dataset.i); resetTimer(); });
+  });
+
+  startTimer();
+})();
+
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+
+<script>
+// Rotating 8th panel
+(function() {
+  const slides = document.querySelectorAll('#rotating-inner .rotating-slide');
+  const dots   = document.querySelectorAll('#rotating-dots .rotating-dot');
+  if (!slides.length) return;
+  let current = 0, timer;
+
+  function goTo(i) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = i;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+  function next() { goTo((current + 1) % slides.length); }
+  function startTimer() { timer = setInterval(next, 5000); }
+  function resetTimer() { clearInterval(timer); startTimer(); }
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => { goTo(+dot.dataset.i); resetTimer(); });
+  });
+
+  startTimer();
+})();
+</script>
+
+</body>
+</html>
